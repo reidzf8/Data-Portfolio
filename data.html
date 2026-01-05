@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Design Projects — Muhammad Farid</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { margin:0; padding:0; box-sizing:border-box; font-family:'Poppins',sans-serif; }
+    body { background:#020617; color:#e5e7eb; }
+    a { color:inherit; text-decoration:none; }
+
+    header {
+      position: fixed; top:0; left:0; width:100%; z-index:1000;
+      padding:1.2rem 2.5rem;
+      display:flex; justify-content:space-between; align-items:center;
+      background:#020617; border-bottom:1px solid #1e293b;
+    }
+    .hamburger {
+      display:none;
+      flex-direction:column;
+      gap:5px;
+      cursor:pointer;
+    }
+    .hamburger span {
+      width:26px; height:2px;
+      background:#e5e7eb;
+      transition:.3s ease;
+    }
+    .logo { font-weight:700; letter-spacing:1px; }
+    nav { display:flex; align-items:center; }
+    nav a { margin-left:1.5rem; opacity:.85; }
+    nav a.active, nav a:hover { opacity:1; color:#38bdf8; }
+
+    main { padding:7rem 10% 4rem; max-width:1300px; margin:auto; }
+
+    .page-title {
+      text-align:center; margin-bottom:3.5rem;
+      opacity:0; transform:translateY(20px); transition:1s ease;
+    }
+    .page-title h1 {
+      font-size:2.6rem;
+      background:linear-gradient(90deg,#e5e7eb,#38bdf8);
+      -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+      margin-bottom:.8rem;
+    }
+    .page-title p { color:#94a3b8; max-width:600px; margin:auto; }
+
+    .filters {
+      display:flex; justify-content:center; flex-wrap:wrap;
+      gap:1rem; margin-bottom:3rem;
+      opacity:0; transform:translateY(20px); transition:1s ease .2s;
+    }
+    .filters button {
+      padding:.6rem 1.4rem; border-radius:999px;
+      border:1px solid #1e293b; background:transparent;
+      color:#e5e7eb; cursor:pointer; transition:.3s ease;
+    }
+    .filters button.active, .filters button:hover {
+      border-color:#38bdf8; color:#38bdf8;
+    }
+
+    .project-list {
+  display:grid;
+  grid-template-columns: repeat(2, 1fr); /* selalu 2 kolom */
+  gap:2rem;
+}
+
+
+    .project-card {
+      background:#020617;
+      border:1px solid #1e293b;
+      border-radius:1.5rem;
+      padding:1.8rem;
+      transition: transform .2s ease, border-color .2s ease;
+      display:flex;
+      flex-direction:column;
+      opacity:0;
+      transform: translateY(20px);
+    }
+
+    .project-card.show { opacity:1 !important; transform: translateY(0) !important; transition: all 1s ease; }
+    .project-card:hover { transform: translateY(-6px); border-color:#38bdf8; }
+
+    .project-image { width:100%; border-radius:1rem; margin-bottom:1rem; object-fit:cover; max-height:380px; }
+
+    .project-title { font-size:1.2rem; font-weight:600; margin-bottom:.6rem; }
+    .project-desc { font-size:.95rem; color:#cbd5f5; line-height:1.6; margin-bottom:1rem; text-align: justify;}
+    .project-tech { display:flex; flex-wrap:wrap; gap:.6rem; margin-bottom:1rem; }
+    .tech-badge { background:#1e293b; padding:.3rem .6rem; border-radius:.5rem; font-size:.8rem; color:#38bdf8; font-weight:500; }
+    .project-doc { background:#111827; padding:1rem; border-radius:.8rem; font-size:.85rem; color:#cbd5f5; line-height:1.4; margin-top:.8rem; text-align: center;}
+    .project-doc:hover a { color:#38bdf8; }
+
+    footer {
+      margin-top:5rem; text-align:center; padding:2rem;
+      border-top:1px solid #1e293b; color:#94a3b8;
+    }
+
+    .show { opacity:1 !important; transform:translateY(0) !important; }
+
+    @media(max-width:768px) {
+      main { padding:7rem 6% 4rem; }
+      nav {
+        position:absolute;
+        top:100%; right:0;
+        background:#020617;
+        flex-direction:column;
+        width:220px;
+        padding:1rem 1.5rem;
+        border-left:1px solid #1e293b;
+        border-bottom:1px solid #1e293b;
+        display:none;
+      }
+      nav.show { display:flex; }
+      nav a { margin:0.8rem 0; }
+      .hamburger { display:flex; }
+    }
+    
+    @media(max-width:768px) {
+  .project-list {
+    grid-template-columns: 1fr; /* 1 kolom untuk mobile */
+  }
+}
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="logo">Portfolio</div>
+
+  <nav id="navMenu">
+    <a href="index.html">Home</a>
+    <a href="about.html">About Me</a>
+    <a href="design.html">Design Projects</a>
+    <a href="#" class="active">Data Projects</a>
+  </nav>
+
+  <div class="hamburger" id="hamburger">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</header>
+
+<main>
+  <div class="page-title">
+    <h1>Data Projects</h1>
+    <p>Kumpulan proyek data science dan visualisasi yang menampilkan kemampuan analisis, pemrograman, dan interpretasi data.</p>
+  </div>
+
+  <div class="filters">
+    <button class="active" data-filter="all">All</button>
+    <button data-filter="excel">Excel & Spredsheet</button>
+    <button data-filter="dashboard">Visualisasi Dashboard</button>
+    <button data-filter="infografis">Infografis Statistik</button>
+    <button data-filter="python">Python</button>
+    <button data-filter="r">R</button>
+    <button data-filter="sql">SQL</button>
+  </div>
+
+  <div class="project-list">
+    <div class="project-card" data-category="dashboard">
+      <img src="asses/Data/Ecommerce.png" alt="E-Commerce Multi-Channel Performance Dashboard (2025)" class="project-image" />
+      <div class="project-title">DASHBOARD | E-Commerce Multi-Channel Performance Dashboard 2025 (Data Dummy)</div>
+      <p class="project-desc">
+        Proyek ini merupakan dashboard interaktif yang dirancang untuk memantau performa bisnis dari tiga marketplace utama di Indonesia: Shopee, Tokopedia, dan Blibli.
+      </p>
+      <div class="project-tech">
+        <span class="tech-badge">Looker Studio</span>
+        <span class="tech-badge">Google Sheets</span>
+        <span class="tech-badge">Data Cleaning</span>
+        <span class="tech-badge">Trend Analysis</span>
+        <span class="tech-badge">Data Visualization</span>
+        <span class="tech-badge">Dashboard Design</span>
+        <span class="tech-badge">Interactive UI</span>
+      </div>
+      <div class="project-doc">
+        <strong><a href="https://lookerstudio.google.com/reporting/f4562269-c0f8-4531-9877-3af9370ba185" target="_blank">Link Demo</a></strong>
+      </div>
+      </div>
+
+    <div class="project-card" data-category="dashboard">
+      <img src="asses/Data/sumu-look.png" alt="Ketimpangan Ekonomi & Kesejahteraan di Provinsi Sumatera Utara" class="project-image" />
+      <div class="project-title">DASHBOARD | Ketimpangan Ekonomi & Kesejahteraan di Provinsi Sumatera Utara 2017 - 2024</div>
+      <p class="project-desc">
+        Dashboard ini bertujuan untuk memetakan distribusi kesejahteraan dan ketimpangan ekonomi di berbagai Kabupaten/Kota di Provinsi Sumatera Utara.
+      <div class="project-tech">
+        <span class="tech-badge">Looker Studio</span>
+        <span class="tech-badge">Google Sheets</span>
+        <span class="tech-badge">Data Cleaning</span>
+        <span class="tech-badge">Socio-Economic Analysis</span>
+        <span class="tech-badge">Data Visualization</span>
+        <span class="tech-badge">Dashboard Design</span>
+        <span class="tech-badge">Interactive UI</span>
+        <span class="tech-badge">Time Series Analysis</span>
+      </div>
+      <div class="project-doc">
+        <strong><a href="https://lookerstudio.google.com/reporting/76be8c9c-964b-4862-8d30-155ac187f993" target="_blank">Link Demo</a></strong>
+      </div>
+      </div>
+
+      <div class="project-card" data-category="dashboard">
+      <img src="asses/Data/Wok.png" alt="mental" class="project-image" />
+      <div class="project-title">DASHBOARD | Kesehatan Mental dan Kepuasan Kerja di Bidang Medis</div>
+      <p class="project-desc">
+        Dashboard ini dirancang untuk menganalisis kondisi kesehatan mental dan tingkat kepuasan kerja dari 5.000 karyawan di berbagai bidang medis.
+      </p>
+      <div class="project-tech">
+        <span class="tech-badge">Google Sheets</span>
+        <span class="tech-badge">Data Cleaning</span>
+        <span class="tech-badge">PivotTable</span>
+        <span class="tech-badge">PivotChart</span>
+        <span class="tech-badge">Data Visualization</span>
+        <span class="tech-badge">Dashboard Design</span>
+        <span class="tech-badge">Interactive UI</span>
+      </div>
+      <div class="project-doc">
+        <strong><a href="https://docs.google.com/spreadsheets/d/1od4aNNQxcj_Bt1aJttVFNzxvPFGKmM_5vmW5u7OOnGQ/edit?gid=784704695#gid=784704695" target="_blank">Link Demo</a></strong>
+      </div>
+      </div>
+
+    <div class="project-card" data-category="dashboard">
+      <img src="asses/Data/wamindo.png" alt="wamindo" class="project-image" />
+      <div class="project-title">DASHBOARD | Performa Penjualan Warmindo</div>
+      <p class="project-desc">
+        Dashboard ini bertujuan untuk memantau performa penjualan harian dan bulanan dari sebuah bisnis kuliner (Warmindo).
+      </p>
+      <div class="project-tech">
+        <span class="tech-badge">Looker Studio</span>
+        <span class="tech-badge">Google Sheets</span>
+        <span class="tech-badge">Data Cleaning</span>
+        <span class="tech-badge">Sales Analysis</span>
+        <span class="tech-badge">Data Visualization</span>
+      </div>
+      <div class="project-doc">
+        <strong><a href="https://lookerstudio.google.com/reporting/e36fd312-6cd7-4a8a-9763-84707dbeadda" target="_blank">Link Demo</a></strong>
+      </div>
+      </div>
+
+      <div class="project-card" data-category="dashboard">
+      <img src="asses/Data/Film.png" alt="Potensi Film Indonesia" class="project-image" />
+      <div class="project-title">DASHBOARD | Potensi Film Indonesia</div>
+      <p class="project-desc">
+        Dashboard ini memberikan gambaran komprehensif mengenai peta industri film di Indonesia selama periode lima tahun.
+      </p>
+      <div class="project-tech">
+        <span class="tech-badge">Tableau</span>
+        <span class="tech-badge">Excel</span>
+        <span class="tech-badge">Data Cleaning</span>
+        <span class="tech-badge">Trend Analysis</span>
+        <span class="tech-badge">Data Visualization</span>
+      </div>
+      </div>
+
+    <div class="project-card" data-category="dashboard">
+      <img src="asses/Data/COvid.png" alt="COVID-19 ASEAN (2020 - 2021)" class="project-image" />
+      <div class="project-title">COVID-19 ASEAN (2020 - 2021)</div>
+      <p class="project-desc">
+        Dashboard ini menyajikan analisis data kesehatan publik terkait pandemi COVID-19 di wilayah ASEAN.
+      </p>
+      <div class="project-tech">
+        <span class="tech-badge">SAP Analytics Cloud (SAC)</span>
+        <span class="tech-badge">Spreadsheets</span>
+        <span class="tech-badge">Data Visualization</span>
+      </div>
+      </div>
+
+    <div class="project-card" data-category="dashboard">
+      <img src="asses/Dashboard Last.png" alt="Ekonomi" class="project-image" />
+      <div class="project-title">DASHBOARD | Ketimpangan Ekonomi & Kesejahteraan di Provinsi Sumatera Utara 2017 - 2024</div>
+      <p class="project-desc">
+        Dashboard ini bertujuan untuk memetakan distribusi kesejahteraan dan ketimpangan ekonomi di berbagai Kabupaten/Kota di Provinsi Sumatera Utara.
+      <div class="project-tech">
+        <span class="tech-badge">Tableau</span>
+        <span class="tech-badge">Excel</span>
+        <span class="tech-badge">Data Cleaning</span>
+        <span class="tech-badge">Socio-Economic Analysis</span>
+        <span class="tech-badge">Data Visualization</span>
+        <span class="tech-badge">Dashboard Design</span>
+        <span class="tech-badge">Interactive UI</span>
+       
+      </div>
+      </div>
+
+<!-- INFOGRAFIS -->
+      <div class="project-card" data-category="infografis">
+      <img src="asses/INFOGRAFIS/INFOGRAFIS DATA QUESST FIX BANGET.png" alt="in" class="project-image" />
+      <div class="project-title">INFOGRAFIS STATISTIK | Transformasi Pendidikan melalui Digitalisasi - Solusi Berkelanjutan untuk Akses Berkualitas & Merata</div>
+      <p class="project-desc">
+        Proyek ini menganalisis peran krusial digitalisasi dalam memperbaiki sistem pendidikan di Indonesia. Fokus utamanya adalah bagaimana teknologi seperti AI, AR/VR, dan E-learning dapat mengatasi ketimpangan kualitas pendidikan antardaerah dan menyiapkan generasi muda menghadapi Era Society 5.0.
+      </p>
+      
+      <div class="project-doc">
+        <strong><a href="https://drive.google.com/file/d/1F0UZsApP1C-yaN-WAPshRNK8GLdWAatk/view?usp=sharing" target="_blank">Link Demo</a></strong>
+      </div>
+      </div>
+
+    <div class="project-card" data-category="infografis">
+      <img src="asses/INFOGRAFIS/INFOGRAFIS FIX (1).png" alt="infografis" class="project-image" />
+      <div class="project-title">INFOGRAFIS STATISTIK | Nature-Based Solution - Aksi Hijau Perangi Emisi Gas Rumah Kaca</div>
+      <p class="project-desc">
+        Infografis ini menyajikan analisis data mengenai ancaman emisi Gas Rumah Kaca (GRK) di Indonesia dan bagaimana solusi berbasis alam (Nature-based Solution) dapat menjadi strategi berkelanjutan untuk mitigasi pemanasan global. Karya ini menggabungkan data proyeksi emisi historis hingga tahun 2030 dengan analisis sektor penyumbang emisi terbesar.
+      </p>
+      <div class="project-doc">
+        <strong><a href="https://drive.google.com/file/d/1WGkwOIhzH1vqUYeNXI48VgQvrw_jPYMV/view?usp=sharing" target="_blank">Link Demo</a></strong>
+      </div>
+      </div>
+
+      <div class="project-card" data-category="infografis">
+      <img src="asses/INFOGRAFIS/YIC.png" alt="mental" class="project-image" />
+      <div class="project-title">INFOGRAFIS STATISTIK | Menuju Indonesia Emas dengan Smart Grid - Optimalisasi Energi Terbarukan</div>
+      <p class="project-desc">
+        Proyek ini menganalisis urgensi transformasi energi di Indonesia dari sumber fosil ke energi terbarukan melalui teknologi Smart Grid. Fokus utamanya adalah memetakan potensienergi hijau nasional, menganalisis efisiensi distribusi, serta melakukan peramalan kebutuhan energi masa depan untuk mendukung pertumbuhan ekonomi yang berkelanjutan.
+      </p>
+      
+      <div class="project-doc">
+        <strong><a href="https://drive.google.com/file/d/1fruSARjspHZxJTHDqwY58vuGVvf8LDb-/view?usp=sharing" target="_blank">Link Demo</a></strong>
+      </div>
+      </div>
+
+    <div class="project-card" data-category="infografis">
+      <img src="asses/INFOGRAFIS/SATRIA DATA (1).png" alt="infografis" class="project-image" />
+      <div class="project-title">INFOGRAFIS STATISTIK | Smart Agroforestry - Strategi Adaptasi Perubahan Iklim</div>
+      <p class="project-desc">
+        Proyek ini adalah infografis analitis yang disusun untuk mengomunikasikan urgensi perubahan iklim terhadap ketahanan pangan di Indonesia. Infografis ini menggabungkan data cuaca ekstrem, anomali suhu, dan analisis sentimen publik untuk menawarkan solusi berbasis teknologi Smart Agroforestry.
+      </p>
+      <div class="project-doc">
+        <strong><a href="https://drive.google.com/file/d/1jnLr639Bf2PAYNCJmbihOrDa4EEGKROc/view?usp=sharing" target="_blank">Link Demo</a></strong>
+      </div>
+      </div>
+
+      <div class="project-card" data-category="infografis">
+      <img src="asses/INFOGRAFIS/JAMBORE STATISTIKA (1).png" alt="infografis" class="project-image" />
+      <div class="project-title">INFOGRAFIS STATISTIK | Menuju Indonesia Emas 2045 - Membangun Pendidikan Berkualitas</div>
+      <p class="project-desc">
+        Infografis ini disusun untuk menganalisis kondisi pendidikan di Indonesia saat ini sebagai fondasi menuju visi Indonesia Emas 2045. Fokus utamanya adalah mengevaluasi kualitas literasi, numerasi, serta korelasi investasi pendidikan terhadap pertumbuhan ekonomi dan tingkat pengangguran.
+      </p>
+  
+      <div class="project-doc">
+        <strong><a href="https://drive.google.com/file/d/1xFQO8Moab1nS7Lvls-jJWpFOzLNE5uoL/view?usp=sharing" target="_blank">Link Demo</a></strong>
+      </div>
+      </div>
+
+    <div class="project-card" data-category="infografis">
+      <img src="asses/INFOGRAFIS/Canvas Infografis.png" alt="infografis" class="project-image" />
+      <div class="project-title">INFOGRAFIS STATISTIK | Artificial Intelligence (AI) Learning Solutions Digital Era 5.0</div>
+      <p class="project-desc">
+        Proyek ini mengeksplorasi fenomena adopsi Artificial Intelligence (AI) dalam sektor pendidikan secara global. Fokus utamanya adalah menganalisis statistik penggunaan AI di kalangan pelajar dan akademisi, pemetaan strategi AI nasional di berbagai negara, serta evaluasi dampak etis dan kesenjangan teknologi yang muncul seiring dengan pesatnya perkembangan teknologi ini.
+      </p>
+      
+      <div class="project-doc">
+        <strong><a href="https://drive.google.com/file/d/1UyP2Kys8mde1GED_QOXsv8V2HRt1j90K/view?usp=sharing" target="_blank">Link Demo</a></strong>
+      </div>
+      </div>
+
+    <!-- PYTHON -->
+      <div class="project-card" data-category="python">
+      <img src="pyy.png" alt="py" class="project-image" />
+      <div class="project-title">PYTHON | Klasifikasi Indeks Kesehatan (Prediksi BMI) Menggunakan Algoritma Machine Learning Descision Tree</div>
+      <div class="project-doc">
+        <strong><a href="https://github.com/reidzf8/Kuliah/tree/main/DataMining/DecisionTree" target="_blank">Link Demo</a></strong>
+      </div>
+      </div>
+
+      <div class="project-card" data-category="python">
+      <img src="pyy.png" alt="py" class="project-image" />
+      <div class="project-title">PYTHON | Skenario Membangiktkan Data</div>
+      <div class="project-doc">
+        <strong><a href="https://rpubs.com/reidn/1164590" target="_blank">Link Demo</a></strong>
+      </div>
+      </div>
+
+      <div class="project-card" data-category="python">
+      <img src="pyy.png" alt="py" class="project-image" />
+      <div class="project-title">PYTHON | Skenario Membangiktkan Data</div>
+      <div class="project-doc">
+        <strong><a href="https://rpubs.com/reidn/1164590" target="_blank">Link Demo</a></strong>
+      </div>
+      </div>
+
+      <div class="project-card" data-category="python">
+      <img src="pyy.png" alt="py" class="project-image" />
+      <div class="project-title">PYTHON | Skenario Membangiktkan Data</div>
+      <div class="project-doc">
+        <strong><a href="https://rpubs.com/reidn/1164590" target="_blank">Link Demo</a></strong>
+      </div>
+      </div>
+
+      <div class="project-card" data-category="python">
+      <img src="pyy.png" alt="py" class="project-image" />
+      <div class="project-title">PYTHON | Skenario Membangiktkan Data</div>
+      <div class="project-doc">
+        <strong><a href="https://rpubs.com/reidn/1164590" target="_blank">Link Demo</a></strong>
+      </div>
+      </div>
+
+      <div class="project-card" data-category="python">
+      <img src="pyy.png" alt="py" class="project-image" />
+      <div class="project-title">PYTHON | Skenario Membangiktkan Data</div>
+      <div class="project-doc">
+        <strong><a href="https://rpubs.com/reidn/1164590" target="_blank">Link Demo</a></strong>
+      </div>
+      </div>
+
+    <!-- R -->
+      <div class="project-card" data-category="r">
+      <img src="rrr.png" alt="r" class="project-image" />
+      <div class="project-title">R | Statistika Deskriptif dan Visualisasi Data</div>
+      <div class="project-doc">
+        <strong><a href="https://rpubs.com/reidn/StatLing-Week4" target="_blank">Link Demo</a></strong>
+      </div>
+      </div>
+
+      <div class="project-card" data-category="r">
+      <img src="rrr.png" alt="r" class="project-image" />
+      <div class="project-title">R | Analisis Regresi untuk Data Lingkungan</div>
+      <div class="project-doc">
+        <strong><a href="https://rpubs.com/reidn/Week5_StatLing" target="_blank">Link Demo</a></strong>
+      </div>
+      </div>
+
+      <div class="project-card" data-category="r">
+      <img src="rrr.png" alt="r" class="project-image" />
+      <div class="project-title">R | Bootstrap dalam Regresi & Estimasi Missing Value</div>
+      <div class="project-doc">
+        <strong><a href="https://rpubs.com/reidn/week12" target="_blank">Link Demo</a></strong>
+      </div>
+      </div>
+
+      <div class="project-card" data-category="r">
+      <img src="rrr.png" alt="r" class="project-image" />
+      <div class="project-title">R | Analisis Time Series</div>
+      <div class="project-doc">
+        <strong><a href="https://rpubs.com/reidn/Pertemuan11TimeSeries" target="_blank">Link Demo</a></strong>
+      </div>
+      </div>
+
+      <div class="project-card" data-category="r">
+      <img src="rrr.png" alt="r" class="project-image" />
+      <div class="project-title">R | Menguji Keakuratan Estimasi Sampel Menggunakan Metode Bootstrap</div>
+      <div class="project-doc">
+        <strong><a href="https://rpubs.com/reidn/Pert-6-MetodeBootstrap" target="_blank">Link Demo</a></strong>
+      </div>
+      </div>
+
+      <div class="project-card" data-category="r">
+      <img src="rrr.png" alt="r" class="project-image" />
+      <div class="project-title">R | Simulasi Data Menggunakan Metode Monte Carlo</div>
+      <div class="project-doc">
+        <strong><a href="https://rpubs.com/reidn/pert9-monte-carlo" target="_blank">Link Demo</a></strong>
+      </div>
+      </div>
+
+      <div class="project-card" data-category="r">
+      <img src="rrr.png" alt="r" class="project-image" />
+      <div class="project-title">R | Simulasi Sederhana: Variabel Random Uniform</div>
+      <div class="project-doc">
+        <strong><a href="https://rpubs.com/reidn/Per3-variabelrandom" target="_blank">Link Demo</a></strong>
+      </div>
+      </div>
+
+      <div class="project-card" data-category="r">
+      <img src="rrr.png" alt="r" class="project-image" />
+      <div class="project-title">R | Estimasi Distribusi dan Parameter Model</div>
+      <div class="project-doc">
+        <strong><a href="https://rpubs.com/reidn/P4-Estimasi" target="_blank">Link Demo</a></strong>
+      </div>
+      </div>
+
+      <div class="project-card" data-category="r">
+      <img src="rrr.png" alt="r" class="project-image" />
+      <div class="project-title">R | Analisi Time Series, Prediksi Inflasi di Jawa Tengah Menggunakan ARIMA</div>
+      <div class="project-doc">
+        <strong><a href="https://rpubs.com/reidn/Arima" target="_blank">Link Demo</a></strong>
+      </div>
+      </div>
+
+      <div class="project-card" data-category="r">
+      <img src="rrr.png" alt="r" class="project-image" />
+      <div class="project-title">R | Skenario Membangiktkan Data</div>
+      <div class="project-doc">
+        <strong><a href="https://rpubs.com/reidn/1164590" target="_blank">Link Demo</a></strong>
+      </div>
+      </div>
+
+    <!-- SQL -->
+    </div>
+  </div>
+</main>
+
+<footer>© 2026 Muhammad Farid</footer>
+
+<script>
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if(entry.isIntersecting) entry.target.classList.add('show');
+    });
+  }, { threshold:0.15 });
+
+  document.querySelectorAll('.page-title, .filters, .project-card')
+    .forEach(el => observer.observe(el));
+
+  const hamburger = document.getElementById('hamburger');
+  const navMenu = document.getElementById('navMenu');
+
+  hamburger.addEventListener('click', () => {
+    navMenu.classList.toggle('show');
+  });
+
+  // FILTER LOGIC
+  const filterButtons = document.querySelectorAll('.filters button');
+  const cards = document.querySelectorAll('.project-card');
+
+  filterButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      filterButtons.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      const filter = btn.dataset.filter;
+
+      cards.forEach(card => {
+        if(filter === 'all' || card.dataset.category === filter) {
+          card.style.display = 'block';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    });
+  });
+</script>
+
+</body>
+</html>
