@@ -20,7 +20,7 @@
   padding:1.2rem 2.5rem;
   z-index:1000;
   background:transparent;
-  border-bottom:1px solid rgba(255,255,255,0.08);
+
 }
 .nav-left{font-weight:700;letter-spacing:1px}
 
@@ -304,7 +304,7 @@
 
     footer { text-align: center; padding: 2rem; background: #020617; color: #94a3b8; }
 
-    .hero-container { display:flex; flex-direction:column; justify-content:center; align-items:center; min-height:100vh; gap: 0.75rem; }
+    .hero-container { display:flex; flex-direction:column; justify-content:center; align-items:center;  gap: 0.75rem; }
     .tool-icons { display:flex; gap:1.5rem; margin-bottom:1.5rem; animation: fadeUp 1s ease-out both; animation-delay: .05s; }
     .tool-icons img {
       width:56px;
@@ -405,8 +405,8 @@
   }
 
   .tool-icons img {
-    width: 38px;
-    height: 38px;
+    width: 50px;
+    height: 50px;
   }
 
   .hero-title .line-1 {
@@ -433,7 +433,7 @@
   }
 
   .btn {
-    font-size: 0.75rem;
+    /* font-size: 0.75rem; */
     padding: 0.45rem 0.9rem;
   }
 
@@ -450,7 +450,7 @@
 
 @media (max-width: 480px) {
   .hero-title .line-1 {
-    font-size: 1.25rem;
+    font-size: 1.45rem;
     transition:.3s ease;
   }
 
@@ -463,8 +463,8 @@
   }
 
   .tool-icons img {
-    width: 34px;
-    height: 34px;
+    width: 37px;
+    height: 37px;
   }
 }
     }
@@ -515,7 +515,7 @@
   <span class="line-1"><span id="typing"></span></span>
 </h1>
     <p class="hero-name">Muhammad Farid</p>
-    <p>Mahasiswa Statistika & Sains Data dengan minat kuat pada analisis data, teknologi, dan desain visual. Fokus pada solusi berbasis data yang rapi, akurat, dan berdampak.</p>
+    <p>Mahasiswa Statistika & Sains Data yang menggabungkan analisis statistik, teknologi, dan desain visual untuk mengubah data menjadi insight yang jelas dan bernilai.</p>
     <div class="hero-buttons">
       <a href="expe.html" class="btn">Experience</a>
       <a href="data.html" class="btn">Project Data</a>
@@ -551,7 +551,7 @@
   };
 </script>
 <script>
-const texts = ["I`am Data Enthusiast & Visual Design"];
+const texts = ["I'am Data Enthusiast & Visual Design"];
 const typingEl = document.getElementById('typing');
 let textIndex = 0, charIndex = 0, deleting = false;
 
