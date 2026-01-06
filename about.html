@@ -27,6 +27,10 @@
     /* ===== Main ===== */
     main { padding:7rem 10% 4rem; max-width:1200px; margin:auto; }
 
+
+    .hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer}
+    .hamburger span{width:26px;height:3px;background:#e5e7eb;border-radius:2px}
+
     .hero {
   display:grid;
   grid-template-columns:0.8fr 1.2fr;
@@ -53,6 +57,8 @@
       max-width:600px;
       opacity:0; transform:translateY(20px);
       transition:1s ease .3s;
+      text-align: justify;
+      
     }
 
     .hero-card {
@@ -85,6 +91,9 @@
       grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
       gap:1.5rem;
     }
+
+    .project-tech { display:flex; flex-wrap:wrap; gap:.6rem; margin-bottom:1rem; }
+    .tech-badge { background:#1e293b; padding:.3rem .6rem; border-radius:.5rem; font-size:.8rem; color:#38bdf8; font-weight:500; }
 
     .skill-card {
       background:#020617;
@@ -153,13 +162,25 @@
       .hero { grid-template-columns:1fr; }
       .profile-photo { margin:0 auto; }
     }
+
+    @media(max-width:768px){
+      nav{
+        position:absolute;top:100%;right:0;
+        background:#020617;width:100%;
+        flex-direction:column;align-items:center;
+        padding:1.5rem 0;display:none;
+        border-bottom:1px solid #1e293b;
+      }
+      nav.show{display:flex}
+      .hamburger{display:flex}
+    }
   </style>
 </head>
 <body>
 
 <header>
   <div class="logo">Portfolio</div>
-  <nav>
+  <nav id="navMenu">
     <a href="index.html">Home</a>
     <a href="data.html">Projects</a>
     <a href="expe.html">Experience</a>
@@ -167,6 +188,8 @@
     <a href="about.html" class="active">About Me</a>
 
   </nav>
+
+   <div class="hamburger" id="hamburger"><span></span><span></span><span></span></div>
 </header>
 
 <main>
@@ -176,8 +199,7 @@
     <div>
       <h1>Tentang Saya</h1>
       <p>
-        Saya mahasiswa Statistika dan Sains Data dengan fokus pada analisis data, pemodelan statistik, dan visualisasi.
-        Saya terbiasa mengubah data mentah menjadi insight yang bisa digunakan untuk pengambilan keputusan.
+        Saya mahasiswa Statistika dan Sains Data dengan kemampuan analisis data, interpretasi, dan visualisasi. Terbiasa mengolah data mentah menjadi insight yang disajikan melalui dashboard untuk mendukung pengambilan keputusan dan memberikan kontribusi nyata.
       </p>
     </div>
   </div>
@@ -187,21 +209,56 @@
     <div class="skills">
       <div class="skill-card">
         <h4>Data Analysis</h4>
-        <p>Eksplorasi data, pembersihan data, dan analisis statistik untuk menemukan pola dan insight.</p>
+        <p>Eksplorasi, pembersihan, dan analisis data untuk menghasilkan insight yang relevan bagi pengambilan keputusan.</p>
       </div>
       <div class="skill-card">
         <h4>Statistical Modeling</h4>
-        <p>ARIMA, regresi, dan model statistik untuk analisis dan prediksi data.</p>
+        <p>Penerapan model statistik (regresi, ARIMA) untuk analisis hubungan dan peramalan data berbasis evidensi.</p>
       </div>
       <div class="skill-card">
         <h4>Data Visualization</h4>
-        <p>Menyajikan data dalam bentuk visual yang jelas dan komunikatif.</p>
+        <p>Visualisasi data yang informatif dan komunikatif untuk menyederhanakan informasi kompleks.</p>
       </div>
       <div class="skill-card">
         <h4>Dashboard & Reporting</h4>
-        <p>Membangun dashboard interaktif untuk monitoring dan pengambilan keputusan.</p>
+        <p>Pengembangan dashboard interaktif sebagai alat monitoring kinerja dan pendukung keputusan berbasis data.</p>
+      </div>
+       <div class="skill-card">
+        <h4>Data Preprocessing</h4>
+        <p>Transformasi data mentah menjadi data siap analisis melalui pembersihan, encoding, dan rekayasa fitur.</p>
+      </div>
+       <div class="skill-card">
+        <h4>Infografis & Data Storytelling</h4>
+        <p>Perancangan infografis berbasis data untuk menyampaikan insight secara ringkas, visual, dan mudah dipahami oleh audiens non-teknis.</p>
       </div>
     </div>
+    <br>
+    <h2>Softskill</h2>
+      <div class="project-tech">
+        <span class="tech-badge">Leadership</span>
+        <span class="tech-badge">Communication</span>
+        <span class="tech-badge">Problem Solving</span>
+        <span class="tech-badge">Critical Thinking</span>
+        <span class="tech-badge">Teamwork</span>
+        <span class="tech-badge">Adaptability</span>
+        <span class="tech-badge">Time Management</span>
+        <span class="tech-badge">Creativity</span>
+        <span class="tech-badge">Empathy</span>
+      </div>
+    <h2>Hardskill</h2>
+      <div class="project-tech">
+        <span class="tech-badge">Excel</span>
+        <span class="tech-badge">Spreadsheets</span>
+        <span class="tech-badge">Looker Studio</span>
+        <span class="tech-badge">Tableau</span>
+        <span class="tech-badge">Python</span>
+        <span class="tech-badge">R</span>
+        <span class="tech-badge">SQL</span>
+        <span class="tech-badge">Figma</span>
+        <span class="tech-badge">Adobe Illustrator</span>
+        <span class="tech-badge">Canva</span>
+        <span class="tech-badge">Google Collab</span>
+      </div>
   </section>
 
   <div class="cta">
@@ -224,5 +281,16 @@
     .forEach(el => observer.observe(el));
 </script>
 
+<script>
+  const hamburger=document.getElementById('hamburger');
+  const navMenu=document.getElementById('navMenu');
+  hamburger.addEventListener('click',()=>navMenu.classList.toggle('show'));
+
+  const o=new IntersectionObserver(entries=>{
+    entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('show')})
+  },{threshold:0.15});
+
+  document.querySelectorAll('.page-title,.doc-card').forEach(el=>o.o(el));
+</script>
 </body>
 </html>
